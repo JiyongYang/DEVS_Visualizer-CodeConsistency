@@ -1,15 +1,22 @@
 from CodeGen import *
 import xml.etree.ElementTree as ET
 
-
+class Model:
+    def __init__(self, name, type):
+        self.name = name
+        self.type = type
+        self.ports = []
 
 
 def ReadXML():
     doc = ET.parse("DEVS_Structure.xml")
     root = doc.getroot()
 
-    
-    return NULL
+
+    for child in root.:
+        print(child.tag)
+
+
 
 def AM_Header_Gen():
     return NULL
@@ -44,8 +51,9 @@ def CM_CPP_Gen():
     return NULL
 
 
+ReadXML()
 
-
+"""
 cpp = CppFile("Coupled_test.cpp")
 
 cpp("#include \"Coupled_test.h\"\n")
@@ -103,3 +111,4 @@ for className in CLASS_NAMES:
                         cpp("return this->$a$;")
 
 cpp.close()
+"""
