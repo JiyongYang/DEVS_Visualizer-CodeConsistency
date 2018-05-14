@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Modules>
+    <TopModule name="ModuleA">
+      <Port type="In">Input_A1</Port>
+      <Port type="In">Input_A2</Port>
+      <Port type="Out">Output_A1</Port>
+      <Instance name="A_SubModuleA">
+        <Type>ModuleB</Type>
+        <Coupling from="ModuleA" fPort="Input_A1" to="A_SubModuleA" tPort="Input_AA1"></Coupling>
+        <Coupling from="ModuleA" fPort="Input_A1" to="A_SubModuleA" tPort="Input_AB1"></Coupling>
+        <Coupling from="A_SubModuleA" fPort="Output_B11111111111111" to="ModuleA" tPort="Output_A1"></Coupling>
+      </Instance>
+      <Instance name="A_SubModuleB">
+        <Type>ModuleB</Type>
+        <Coupling from="ModuleA" fPort="Input_A1" to="A_SubModuleB" tPort="Input_AA1"></Coupling>
+        <Coupling from="ModuleA" fPort="Input_A1" to="A_SubModuleB" tPort="Input_AB1"></Coupling>
+        <Coupling from="A_SubModuleB" fPort="Output_B11111111111111" to="ModuleA" tPort="Output_A1"></Coupling>
+      </Instance>
+    </TopModule>
+    <ModulePool>
+      <Module name="ModuleB">
+        <Port type="In">Input_AA1</Port>
+        <Port type="In">Input_AB1</Port>
+        <Port type="Out">Output_B11111111111111</Port>
+        <Instance name="B_SubModuleB">
+          <Type>ModuleC</Type>
+          <Coupling from="ModuleB" fPort="Input_AA1" to="B_SubModuleB" tPort="Input_C1"></Coupling>
+          <Coupling from="ModuleB" fPort="Input_AB1" to="B_SubModuleB" tPort="Input_C1"></Coupling>
+          <Coupling from="B_SubModuleB" fPort="Output_C1" to="A_SubModuleA" tPort="Output_B1"></Coupling>
+        </Instance>
+      </Module>
+      <Module name="ModuleC">
+        <Port type="In">Input_C1</Port>
+        <Port type="In">Input_C2</Port>
+        <Port type="Out">Output_C1</Port>
+      </Module>
+    </ModulePool>
+</Modules>
