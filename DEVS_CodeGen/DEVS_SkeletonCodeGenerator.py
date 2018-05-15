@@ -1,21 +1,6 @@
 from CodeGen import *
-import xml.etree.ElementTree as ET
-
-class Model:
-    def __init__(self, name, type):
-        self.name = name
-        self.type = type
-        self.ports = []
-
-
-def ReadXML():
-    doc = ET.parse("DEVS_Structure.xml")
-    root = doc.getroot()
-
-
-    for child in root.:
-        print(child.tag)
-
+from Model import *
+from DEVS_XMLParser import *
 
 
 def AM_Header_Gen():
@@ -50,8 +35,7 @@ def CM_Header_Gen():
 def CM_CPP_Gen():
     return NULL
 
-
-ReadXML()
+#ReadXML("DEVS_Structure.xml")
 
 """
 cpp = CppFile("Coupled_test.cpp")
