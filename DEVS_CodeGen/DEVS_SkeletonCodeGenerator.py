@@ -4,10 +4,10 @@ from DEVS_XMLParser import *
 
 
 def AM_Header_Gen():
-    return NULL
+    return "None"
 
 def AM_CPP_Gen():
-    return NULL
+    return "None"
 
 # Coupled Model
 # Header
@@ -33,7 +33,7 @@ def CM_Header_Gen():
 # Coupled Model
 # CppFile
 def CM_CPP_Gen():
-    return NULL
+    return "None"
 
 #ReadXML("DEVS_Structure.xml")
 
