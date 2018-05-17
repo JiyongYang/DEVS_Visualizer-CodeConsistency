@@ -677,7 +677,7 @@ namespace DEVS_Visualizer
                 return;
 
             MessageBox.Show(shape.Name + "\n [" + shape.FromShape.AggregateModel.Name + " , " + shape.StartPlug.InwardPort.Name
-                + "]\n >> \n[" + shape.ToShape.AggregateModel.Name + " , " + shape.EndPlug.InwardPort.Name + "]", "Country clicked:", MessageBoxButtons.OK, MessageBoxIcon.None);
+                + "]\n >> \n[" + shape.ToShape.AggregateModel.Name + " , " + shape.EndPlug.InwardPort.Name + "]", "Connector clicked:", MessageBoxButtons.OK, MessageBoxIcon.None);
             args.Handled = true;
         }
 
@@ -687,8 +687,7 @@ namespace DEVS_Visualizer
             if (shape == null)
                 return;
 
-            MessageBox.Show(shape.Name + "\n [" + shape.FromShape.AggregateModel.Name + " , " + shape.StartPlug.InwardPort.Name
-                + "]\n >> \n[" + shape.ToShape.AggregateModel.Name + " , " + shape.EndPlug.InwardPort.Name + "]", "Country clicked:", MessageBoxButtons.OK, MessageBoxIcon.None);
+            MessageBox.Show(shape.Name, "Instance clicked:", MessageBoxButtons.OK, MessageBoxIcon.None);
             args.Handled = true;
         }
 
