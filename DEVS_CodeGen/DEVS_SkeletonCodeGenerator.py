@@ -28,9 +28,11 @@ def AM_Header_Gen(modelObj):
             cpp("virtual bool OutputFn(CDEVSimMessage &);")
             cpp("virtual TimeType TimeAdvanceFn();\n")
             cpp.label("public")
+            cpp("// [Region] Ports")
             for varName in VAR_NAMES[amName]:
                 with cpp.subs(_Var=varName, _var=varName.lower()):
                     cpp("static std::string $_Var$;")
+            cpp("// [EndRegion] Ports")
 
     cpp.close()
 
@@ -49,16 +51,18 @@ def AM_CPP_Gen(modelObj):
     VAR_NAMES = {amName: lstPorts}
 
     # initialize Port name
+    cpp("// [Region] Ports_init")
     for varName in VAR_NAMES[amName]:
         with cpp.subs(_Var=varName, _var=varName.lower()):
             cpp("std::string " + amName + "::$_Var$ = \"$_Var$\";")
-    cpp("")
+    cpp("// [EndRegion] Ports_init")
 
     with cpp.block(amName+"::"+amName+"()"):
         cpp("// Constructor")
         cpp("SetName(\""+amName+"\");\n")
 
         # AddPorts
+        cpp("// [Region] Ports_reg")
         cpp("// Input ports")
         for pt in amPorts:
             if(pt.cType == Type.IN):
@@ -67,6 +71,7 @@ def AM_CPP_Gen(modelObj):
         for pt in amPorts:
             if (pt.cType == Type.OUT):
                 cpp("AddOutPorts(1, " + pt.cName + ".c_str());")
+        cpp("// [Region] Ports_reg")
     cpp("")
 
     with cpp.block(amName + "::~" + amName + "()"):
@@ -94,6 +99,7 @@ def CM_Header_Gen(modelObj):
     for i in cmPorts:
         lstPorts += [i.cName]
 
+
     VAR_NAMES = { cmName: lstPorts }
     with cpp.subs(ClassName=cmName):
         with cpp.block("class $ClassName$ : public CCoupled", ";"):
@@ -101,9 +107,11 @@ def CM_Header_Gen(modelObj):
             cpp("$ClassName$();")
             cpp("~$ClassName$();\n")
             cpp.label("public")
+            cpp("// [Region] Ports")
             for varName in VAR_NAMES[cmName]:
                 with cpp.subs(_Var=varName, _var=varName.lower()):
                     cpp("static std::string $_Var$;")
+            cpp("// [EndRegion] Ports")
     cpp.close()
 
 # Coupled Model
@@ -139,16 +147,18 @@ def CM_CPP_Gen(modelObj):
     VAR_NAMES = {cmName: lstPorts}
 
     # initialize Port name
+    cpp("// [Region] Ports_init")
     for varName in VAR_NAMES[cmName]:
         with cpp.subs(_Var=varName, _var=varName.lower()):
             cpp("std::string "+cmName+"::$_Var$ = \"$_Var$\";")
-    cpp("")
+    cpp("// [EndRegion] Ports_init\n")
 
     with cpp.block(cmName+"::"+cmName+"()"):
         cpp("// Constructor")
         cpp("SetName(\""+cmName+"\");\n")
 
         # AddPorts
+        cpp("// [Region] Ports_reg")
         cpp("// Input ports")
         for pt in cmPorts:
             if(pt.cType == Type.IN):
@@ -157,22 +167,23 @@ def CM_CPP_Gen(modelObj):
         for pt in cmPorts:
             if (pt.cType == Type.OUT):
                 cpp("AddOutPorts(1, " + pt.cName + ".c_str());")
-        cpp("")
+        cpp("// [EndRegion] Ports_reg\n")
 
         # SubModel
-        cpp("// Models")
+        cpp("// [Region] Models")
         for sm in cmSubModel:
             cpp("CModel* "+sm.cName.lower()+" = new "+sm.cName+"();")
             cpp("AddComponent(1, "+sm.cName.lower()+");")
-        cpp("")
+        cpp("// [EndRegion] Models\n")
 
         # Coupling
-        cpp("// Coupling")
+        cpp("// [Region] Couplings")
         for cp in cmCoupling:
             cpp("AddCoupling("+ (_this if cp.cFrom == cmName else cp.cFrom.lower()) + \
                 ", " + cp.cFrom+"::"+cp.cFPort+".c_str(), "+ (_this if cp.cTo == cmName else cp.cTo.lower()) + \
                 ", " + cp.cTo+"::"+cp.cTPort+".c_str());" \
                 )
+        cpp("// [EndRegion] Couplings")
     cpp("")
     with cpp.block(cmName + "::~" + cmName + "()"):
         cpp("// Destructor")

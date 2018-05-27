@@ -14,7 +14,9 @@ public:
 	virtual TimeType TimeAdvanceFn();
 
 public:
+	// [Region] Ports
 	static std::string Input_C1;
 	static std::string Input_C2;
 	static std::string Output_C1;
+	// [EndRegion] Ports
 };
