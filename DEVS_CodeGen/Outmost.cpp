@@ -22,6 +22,12 @@ Outmost::Outmost()
 	AddComponent(1, a_submoduleb);
 	
 	// Coupling
+	AddCoupling(this, Outmost::OutMost_Input_1.c_str(), a_submodulea, A_SubModuleA::Input_AA1.c_str());
+	AddCoupling(this, Outmost::OutMost_Input_1.c_str(), a_submodulea, A_SubModuleA::Input_AB1.c_str());
+	AddCoupling(a_submodulea, A_SubModuleA::Output_B11111111111111.c_str(), this, Outmost::OutMost_Output_1.c_str());
+	AddCoupling(this, Outmost::OutMost_Input_2.c_str(), a_submoduleb, A_SubModuleB::Input_AA1.c_str());
+	AddCoupling(this, Outmost::OutMost_Input_2.c_str(), a_submoduleb, A_SubModuleB::Input_AB1.c_str());
+	AddCoupling(a_submoduleb, A_SubModuleB::Output_B11111111111111.c_str(), this, Outmost::OutMost_Output_1.c_str());
 }
 
 Outmost::~Outmost()

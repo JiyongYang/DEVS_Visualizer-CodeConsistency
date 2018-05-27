@@ -86,9 +86,25 @@ def UpdateModelInfo():
 def UpdateModelInfo_recur(submodels):
     for i in submodels:
         print(i.cName)
-        ModelInfo = ModelPool[i.cType]
-        i.cPorts += copy.deepcopy(ModelInfo.cPorts)
-        i.cInstances += copy.deepcopy(ModelInfo.cInstances)
+        ModelInfo = copy.deepcopy(ModelPool[i.cType])
+        omName = copy.deepcopy(i.cName)
+        mpName = copy.deepcopy(ModelInfo.cName)
+        # rename coupling from/to
+        for cp in ModelInfo.cCouplings:
+            if(cp.cFrom == mpName):
+                cp.cFrom = omName
+            if(cp.cTo == mpName):
+                cp.cTo = omName
+        for sm in ModelInfo.cInstances:
+            for cp in sm.cCouplings:
+                if (cp.cFrom == mpName):
+                    cp.cFrom = omName
+                if (cp.cTo == mpName):
+                    cp.cTo = omName
+
+        i.cPorts += ModelInfo.cPorts
+        i.cInstances += ModelInfo.cInstances
+        i.cCouplings += ModelInfo.cCouplings
         i.cType = i.cType + "/Done"
         if( len(i.cInstances) > 0 ):
             UpdateModelInfo_recur(i.cInstances)

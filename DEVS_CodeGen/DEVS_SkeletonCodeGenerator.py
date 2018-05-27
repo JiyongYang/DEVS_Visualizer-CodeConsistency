@@ -4,7 +4,9 @@ from DEVS_XMLParser import *
 
 _this = "this"
 
-def AM_Header_Gen(amName, amPorts):
+def AM_Header_Gen(modelObj):
+    amName = modelObj.cName
+    amPorts = modelObj.cPorts
     cpp = CppFile(amName + ".h")
     # [Fix] start
     cpp("#include \"DEVSim.h\"")
@@ -33,7 +35,9 @@ def AM_Header_Gen(amName, amPorts):
     cpp.close()
 
 
-def AM_CPP_Gen(amName, amPorts):
+def AM_CPP_Gen(modelObj):
+    amName = modelObj.cName
+    amPorts = modelObj.cPorts
     cpp = CppFile(amName + ".cpp")
     # [Fix] start
     cpp("#include \"" + amName + ".h\"\n")
@@ -76,7 +80,9 @@ def AM_CPP_Gen(amName, amPorts):
 
 # Coupled Model
 # Header
-def CM_Header_Gen(cmName, cmPorts):
+def CM_Header_Gen(modelObj):
+    cmName = modelObj.cName
+    cmPorts = modelObj.cPorts
     cpp = CppFile(cmName+".h")
 
     # [Fix] start
@@ -102,7 +108,25 @@ def CM_Header_Gen(cmName, cmPorts):
 
 # Coupled Model
 # CppFile
-def CM_CPP_Gen(cmName, cmPorts, cmSubModel, cmCoupling):
+def CM_CPP_Gen(modelObj):
+    cmName = modelObj.cName
+    cmPorts = copy.deepcopy(modelObj.cPorts)
+    cmSubModel = copy.deepcopy(modelObj.cInstances)
+    cmCoupling = []
+    _cmCoupling = copy.deepcopy(modelObj.cCouplings)
+
+    fullNamelst = modelObj.cFullname.split(".")
+    parentModelName = ("Outmost_except" if len(fullNamelst) == 1 else fullNamelst[-2])
+    print(modelObj.cFullname +" || "+parentModelName)
+
+    #get coupling information
+    for subM in modelObj.cInstances:
+        _cmCoupling += copy.deepcopy(subM.cCouplings)
+
+    for cp in _cmCoupling:
+        if((cp.cFrom == cmName or cp.cTo == cmName) and cp.cFrom != parentModelName and cp.cTo != parentModelName):
+            cmCoupling += [cp]
+
     cpp = CppFile(cmName + ".cpp")
 
     # [Fix] start
@@ -145,9 +169,9 @@ def CM_CPP_Gen(cmName, cmPorts, cmSubModel, cmCoupling):
         # Coupling
         cpp("// Coupling")
         for cp in cmCoupling:
-            cpp("AddCoupling("+ _this if cp.cFrom == cmName else cp.cFrom.lower() + \
-                ", " + cp.cFrom+"::"+cp.cFPort+".c_str(), "+ _this if cp.cTo == cmName else cp.cTo.lower() + \
-                ", " + cp.cTo+"::"+cp.cTPort+".c_str();"
+            cpp("AddCoupling("+ (_this if cp.cFrom == cmName else cp.cFrom.lower()) + \
+                ", " + cp.cFrom+"::"+cp.cFPort+".c_str(), "+ (_this if cp.cTo == cmName else cp.cTo.lower()) + \
+                ", " + cp.cTo+"::"+cp.cTPort+".c_str());" \
                 )
     cpp("")
     with cpp.block(cmName + "::~" + cmName + "()"):
@@ -155,17 +179,28 @@ def CM_CPP_Gen(cmName, cmPorts, cmSubModel, cmCoupling):
 
     cpp.close()
 
+def SkeletonCodeGen():
+    CM_Header_Gen(OutmostModel)
+    CM_CPP_Gen(OutmostModel)
+
+    SkeletonCodeGen_recur(OutmostModel.cInstances)
+
+
+def SkeletonCodeGen_recur(_submodels):
+    for _model in _submodels:
+        if (_model.cModelType == "Coupled"):
+            CM_Header_Gen(_model)
+            CM_CPP_Gen(_model)
+        else:
+            AM_Header_Gen(_model)
+            AM_CPP_Gen(_model)
+        if(len(_model.cInstances) > 0):
+            SkeletonCodeGen_recur(_model.cInstances)
+
 
 ReadXML("DEVS_Structure.xml")
 
-
-# test gen Coupled
-CM_Header_Gen(OutmostModel.cName, copy.deepcopy(OutmostModel.cPorts))
-CM_CPP_Gen(OutmostModel.cName, copy.deepcopy(OutmostModel.cPorts), copy.deepcopy(OutmostModel.cInstances), copy.deepcopy(OutmostModel.cCouplings))
-
-# test gen Atomic
-AM_Header_Gen(ModelPool["ModelC"].cName, copy.deepcopy(ModelPool["ModelC"].cPorts))
-AM_CPP_Gen(ModelPool["ModelC"].cName, copy.deepcopy(ModelPool["ModelC"].cPorts))
+SkeletonCodeGen()
 
 print("done")
 

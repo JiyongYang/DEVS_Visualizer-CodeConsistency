@@ -24,9 +24,9 @@
         <Port type="Out">Output_B11111111111111</Port>
         <SubModel name="B_SubModuleB" type="Atomic">
           <Type>ModelC</Type>
-          <Coupling from="ModuleB" fPort="Input_AA1" to="B_SubModuleB" tPort="Input_C1"></Coupling>
-          <Coupling from="ModuleB" fPort="Input_AB1" to="B_SubModuleB" tPort="Input_C1"></Coupling>
-          <Coupling from="B_SubModuleB" fPort="Output_C1" to="ModuleB" tPort="Output_B11111111111111"></Coupling>
+          <Coupling from="ModelB" fPort="Input_AA1" to="B_SubModuleB" tPort="Input_C1"></Coupling>
+          <Coupling from="ModelB" fPort="Input_AB1" to="B_SubModuleB" tPort="Input_C1"></Coupling>
+          <Coupling from="B_SubModuleB" fPort="Output_C1" to="ModelB" tPort="Output_B11111111111111"></Coupling>
         </SubModel>
       </Model>
       <Model name="ModelC" type="Atomic">
