@@ -48,3 +48,4 @@ C:\Users\ellei\git\DEVS_Visualizer-CodeConsistency\DEVS_Visualizer\DEVS_Visualiz
 C:\Users\ellei\git\DEVS_Visualizer-CodeConsistency\DEVS_Visualizer\DEVS_Visualizer\obj\Debug\DEVS_Visualizer.csproj.CoreCompileInputs.cache
 C:\Users\ellei\git\DEVS_Visualizer-CodeConsistency\DEVS_Visualizer\DEVS_Visualizer\obj\Debug\DEVS_Visualizer.exe
 C:\Users\ellei\git\DEVS_Visualizer-CodeConsistency\DEVS_Visualizer\DEVS_Visualizer\obj\Debug\DEVS_Visualizer.pdb
+C:\Users\ellei\git\DEVS_Visualizer-CodeConsistency\DEVS_Visualizer\DEVS_Visualizer\obj\Debug\DEVS_Visualizer.InstanceEditDialog.resources

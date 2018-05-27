@@ -486,12 +486,19 @@ namespace DEVS_Visualizer
 
             // Add Instance
             NRectangleShape node = new NRectangleShape(0, 0, (int)instanceWidth, (int)instanceHeight);
+            NAbilities protection = node.Protection;
+            protection.InplaceEdit = true;
+            node.Protection = protection;
             node.Name = name;
+            
             group.Shapes.AddChild(node);
 
             NTextShape nodeName = new NTextShape(name, 0, -15, textWidth, textHeight);
             nodeName.Style.TextStyle = new NTextStyle();
             nodeName.Style.TextStyle.FontStyle = new NFontStyle(new Font("Arial", 9));
+            protection = nodeName.Protection;
+            protection.InplaceEdit = true;
+            nodeName.Protection = protection;
             group.Shapes.AddChild(nodeName);
 
             // Add Port
@@ -499,6 +506,9 @@ namespace DEVS_Visualizer
             for (int i = 0; i < ports.Count; i++)
             {
                 NShape port = createPort(ports[i].Name, ports[i].Type);
+                protection = port.Protection;
+                protection.InplaceEdit = true;
+                port.Protection = protection;
                 group.Shapes.AddChild(port);
                 if (ports[i].Type == PortType.IN)
                 {
@@ -511,6 +521,9 @@ namespace DEVS_Visualizer
                     portName.Style.TextStyle = new NTextStyle();
                     portName.Style.TextStyle.FontStyle = new NFontStyle(new Font("Arial", 9));
                     portName.Style.TextStyle.StringFormatStyle.HorzAlign = Nevron.HorzAlign.Left;
+                    protection = portName.Protection;
+                    protection.InplaceEdit = true;
+                    portName.Protection = protection;
                     group.Shapes.AddChild(portName);
                 }
                 else
@@ -524,6 +537,9 @@ namespace DEVS_Visualizer
                     portName.Style.TextStyle = new NTextStyle();
                     portName.Style.TextStyle.FontStyle = new NFontStyle(new Font("Arial", 9));
                     portName.Style.TextStyle.StringFormatStyle.HorzAlign = Nevron.HorzAlign.Right;
+                    protection = portName.Protection;
+                    protection.InplaceEdit = true;
+                    portName.Protection = protection;
                     group.Shapes.AddChild(portName);
                 }
 

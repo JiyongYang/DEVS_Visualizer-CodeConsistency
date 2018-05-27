@@ -22,9 +22,10 @@ class Port:
         return "Type : {},  Name : {}".format(self.cType, self.cName)
 
 class Model:
-    def __init__(self, _name, _fullname, _type):
+    def __init__(self, _name, _fullname, _mType, _type):
         self.cName = _name
         self.cFullname = _fullname
+        self.cModelType = _mType
         self.cType = _type
         self.cPorts = []
         self.cCouplings = []
@@ -32,6 +33,6 @@ class Model:
 
     def __str__(self):
         return "-------[Model Info]-------\n"\
-        "@ Name: {}\n@ Fullname: {}\n@ Type: {}\n"\
+        "@ Name: {}\n@ Fullname: {}\n@ Model Type: {}\n@ Type: {}\n"\
         "@ Ports: {}\n@ Coupling: {}\n@ Instances: {}"\
-        "\n--------------------------".format(self.cName, self.cFullname, self.cType, self.cPorts, self.cCouplings, self.cInstances)
+        "\n--------------------------".format(self.cName, self.cFullname, self.cModelType, self.cType, self.cPorts, self.cCouplings, self.cInstances)
