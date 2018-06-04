@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DEVS_Visualizer_Ver2")]
+[assembly: AssemblyTitle("DEVS_Visualizer_ver.2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DEVS_Visualizer_Ver2")]
+[assembly: AssemblyProduct("DEVS_Visualizer_ver.2")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7447ac21-8f6c-4db6-b85c-c984fc31cb12")]
+[assembly: Guid("43793847-b264-4c00-8872-8995ceff27cf")]
 
 // Version information for an assembly consists of the following four values:
 //

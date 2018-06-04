@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DEVS_Visualizer_Ver2.Properties
+namespace DEVS_Visualizer_ver._2.Properties
 {
 
 

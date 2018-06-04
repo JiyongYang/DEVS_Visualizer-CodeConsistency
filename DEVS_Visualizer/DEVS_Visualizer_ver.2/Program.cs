@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DEVS_Visualizer_Ver2
+namespace DEVS_Visualizer_ver._2
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace DEVS_Visualizer_Ver2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }
