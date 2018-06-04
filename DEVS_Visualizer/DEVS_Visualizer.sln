@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEVS_Visualizer", "DEVS_Visualizer\DEVS_Visualizer.csproj", "{0C8A9B01-6553-4483-9E0B-A1A419833D04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEVS_Visualizer_ver.2", "..\..\..\source\repos\DEVS_Visualizer\DEVS_Visualizer_ver.2\DEVS_Visualizer_ver.2.csproj", "{43793847-B264-4C00-8872-8995CEFF27CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0C8A9B01-6553-4483-9E0B-A1A419833D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C8A9B01-6553-4483-9E0B-A1A419833D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C8A9B01-6553-4483-9E0B-A1A419833D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43793847-B264-4C00-8872-8995CEFF27CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43793847-B264-4C00-8872-8995CEFF27CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43793847-B264-4C00-8872-8995CEFF27CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43793847-B264-4C00-8872-8995CEFF27CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
