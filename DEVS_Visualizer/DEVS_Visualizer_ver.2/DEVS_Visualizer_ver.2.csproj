@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseType\BaseModel.cs" />
-    <Compile Include="BaseType\Model.Coupling.cs" />
+    <Compile Include="BaseType\Coupling.cs" />
     <Compile Include="BaseType\Model.cs" />
     <Compile Include="BaseType\MultikeyDictionary.cs" />
     <Compile Include="BaseType\Port.cs" />
