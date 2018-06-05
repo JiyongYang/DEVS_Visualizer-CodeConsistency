@@ -111,6 +111,14 @@ namespace DEVS_Visualizer_ver._2
                         mod.Instances.Add(temp);
                         idOffset += 1;
                         break;
+                    case "Couplings":
+                        foreach (var ele in elements)
+                        {
+                            Coupling cp = new Coupling(ele.Attribute("from").Value,
+                                    ele.Attribute("fPort").Value, ele.Attribute("to").Value, ele.Attribute("tPort").Value);
+                            mod.Couplings.Add(cp);
+                        }
+                        break;
                     default:
                         Console.WriteLine("[ERROR]----" + e.Name);
                         break;
