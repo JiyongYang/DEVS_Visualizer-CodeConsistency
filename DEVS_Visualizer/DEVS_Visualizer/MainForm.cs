@@ -35,6 +35,7 @@ namespace DEVS_Visualizer
         List<UDNGroup> instanceList;
         MultiKeyDictionary<string, string, UDNGroup> objMDict;
 
+        private EditPorts editPorts;
 
         public MainForm()
         {
@@ -347,6 +348,8 @@ namespace DEVS_Visualizer
             {
                 string key = _module.Instances[i].Name;
                 UDNGroup instance = CreateInstance(key, ModulePool[_module.Instances[i].Type].Ports, _module.Instances[i].Id);
+                // [!@#$] maybe need Deepcopy of ports
+                //instance.UDPorts = ModulePool[_module.Instances[i].Type].Ports;
                 nDrawingDocument.ActiveLayer.AddChild(instance);
                 instanceList.Add(instance);
                 for (int j = 0; j < ModulePool[_module.Instances[i].Type].Ports.Count; j++)
@@ -461,6 +464,8 @@ namespace DEVS_Visualizer
 
             UDNGroup group = new UDNGroup();
             group.Name = name;
+            group.UDFullName = name;
+            group.UDPorts = ports;
 
             // find max input/output port size
             for (int i = 0; i < ports.Count; i++)
@@ -699,12 +704,15 @@ namespace DEVS_Visualizer
 
         private void instance_DoubleClick(NNodeViewEventArgs args)
         {
-            NShape shape = args.Node as NShape;
+            UDNGroup shape = args.Node as UDNGroup;
             if (shape == null)
                 return;
 
-            MessageBox.Show(shape.Name, "Instance clicked:", MessageBoxButtons.OK, MessageBoxIcon.None);
+            MessageBox.Show(shape.Name + "  " + shape.UDPorts.Count, "Instance clicked:~~~", MessageBoxButtons.OK, MessageBoxIcon.None);
             args.Handled = true;
+
+            editPorts = new EditPorts(shape);
+            editPorts.Show();
         }
 
  

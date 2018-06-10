@@ -112,7 +112,7 @@ namespace DEVS_Visualizer_ver._2
                         idOffset += 1;
                         break;
                     case "Couplings":
-                        foreach (var ele in elements)
+                        foreach (var ele in e.Elements())
                         {
                             Coupling cp = new Coupling(ele.Attribute("from").Value,
                                     ele.Attribute("fPort").Value, ele.Attribute("to").Value, ele.Attribute("tPort").Value);

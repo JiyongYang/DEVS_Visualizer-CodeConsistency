@@ -9,35 +9,49 @@ using Nevron.Diagram.Shapes;
 
 namespace DEVS_Visualizer
 {
-    class UDNGroup : NGroup
+    public class UDNGroup : NGroup
     {
-        private string udFullName;
-        private string udUuid;
-        private string udId;
-        private List<Port> udPorts;
-        
+        private string uDFullName;
+        private string uDUuid;
+        private string uDId;
+        private List<Port> uDInPorts;
+        private List<Port> uDOutPorts;
+        private List<Port> uDPorts;
+
         public string UDFullName
         {
-            get { return udFullName; }
-            set { udFullName = value; }
+            get { return uDFullName; }
+            set { uDFullName = value; }
         }
 
         public string UDUuid
         {
-            get { return udUuid; }
-            set { udUuid = value; }
+            get { return uDUuid; }
+            set { uDUuid = value; }
         }
 
         public string UDUdId
         {
-            get { return udId; }
-            set { udId = value; }
+            get { return uDId; }
+            set { uDId = value; }
         }
 
         public List<Port> UDPorts
         {
-            get { return udPorts; }
-            set { udPorts = value; }
+            get { return uDPorts; }
+            set { uDPorts = value; }
+        }
+
+        public List<Port> UDInPorts
+        {
+            get { return uDInPorts; }
+            set { uDInPorts = value; }
+        }
+
+        public List<Port> UDOutPorts
+        {
+            get { return uDOutPorts; }
+            set { uDOutPorts = value; }
         }
     }
 }
